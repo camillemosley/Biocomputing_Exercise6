@@ -21,3 +21,8 @@ cut -d , -f 1,2,4 "$1" | sort -t "," -k 4,4n | head -n 2 | tail -n 1
 echo "number of females in the top 10 earning individuals"
 sort -t "," -k4,4nr "$1" | head -n 10 | grep "female" | wc -l
 
+#returns the difference between the lowest wage for an individual that graduated high school but not college and college graduates
+val12=$(cat wages.csv | cut -d , -f 3,4 | grep -E "^(12|13|14|15)" | cut -d , -f 2 | sort -n | head -n 1)
+val16=$(cat wages.csv | cut -d , -f 3,4 | grep -E "^16" | cut -d , -f 2 | sort -n | head -n 1)
+valfinal=$(echo "$val16-$val12" | bc)
+echo "the lowest wage of a high school graduate who didn't graduate college is $valfinal"
