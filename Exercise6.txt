@@ -1,0 +1,37 @@
+
+#Question 1
+echo "Question 1, the appropriate answer is in Answer1.txt"
+cat wages.csv | cut -d , -f 1,2 | sort -u | sed -E 's/\,/ /g' > Answer1.txt
+
+#Question 2
+echo "Question 2"
+echo "highest wage earner:"
+cat wages.csv | cut -d , -f 1,2,4 | sort -t , -k 3 -n | tail -n 1
+
+echo "lowest wage earner:"
+cat wages.csv | cut -d , -f 1,2,4 | sort -t , -k 3 -n | head -n 2 | tail -n 1
+
+echo "female number in top ten earners:"
+cat wages.csv | cut -d , -f 1,2,4 | sort -t , -n -k 3 | tail -n 10 | grep -c "female"
+
+#Question 3
+echo "Question 3"
+#the lowest wage for 12 years of school
+minwage_12=$(cat wages.csv | cut -d , -f 3,4 | grep -E "12," | sort -t , -n -k2 | cut -d , -f 2 | head -n 1)
+echo "the lowest wage for 12 years of school:"
+echo "$minwage_12"
+#the lowest wage for 16 years of school
+minwage_16=$(cat wages.csv | cut -d , -f 3,4 | grep -E "16," | sort -t , -n -k2 | cut -d , -f 2 | head -n 1)
+echo "the lowest wage for 16 years of school:"
+echo "$minwage_16"
+echo "The difference between the minimum wage for 12 years of school and 16 years of school is..." 
+echo "Since BC doesn't work on my system, this is the code I would have used to make the computation: "$minwage_16 - $minwage_12" | bc"
+
+
+
+
+
+
+
+
+
