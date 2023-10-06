@@ -1,0 +1,3 @@
+#Code for creating a file from wages.csv containing the gender and experience year
+#The code extracts the first two columns from wages csv, and sorts them, transferring into another text file
+cut -d ',' -f1,2 wages.csv | sort -t',' -k1,1 -k2,2n | uniq > unique_gender_yearsExperience.txt
