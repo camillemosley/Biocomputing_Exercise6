@@ -1,4 +1,6 @@
-#Given the data we were given in wages.csv
+#Given the data from wages.csv and creating a file with the unique gender-yearsExperience combos
+cut -d , -f 1,2 wages.csv | sort -k 2,2 -n | uniq >> gender-yearsExperience.txt
+echo "file that contains unique gender-yearsExperience combos created in gender-yearsExperience.txt"
 
 # 1) Asking for Highest Earner
 echo "Highest Earner:"
