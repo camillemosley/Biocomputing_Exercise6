@@ -20,13 +20,29 @@ cat "$1" | sort -t ',' -k 4,4n | tail -n 10 | grep -c female
 #Question 3 answer:
 
 #count12="$(cat "$1" | sort -t ',' -k 3,3n | head -n 2542 | tail -n 1187 | wc -l)"
-#echo "$count12"
 
-#salary12="$( paste -sd+ wages.csv | sed -E 's/[0-9],/ /g' | sed -E 's/male,/ /g' | sed -E 's/[1] / /g'| sed -E 's/ //g')"
+#echo yearsSchool,wage
 
-#echo "$salary12"
+#Average wage for 12 years of school
+#	new file for wages of 12 years of school	
+cat wages.csv| sort -t ',' -k 3,3n | cut -d, -f 4 | head -n 2542 | tail -n 1187 > wagesfor12.txt
 
-#echo "($salary12)/$count12" | bc
+#variables
+sumoftotal12="$(paste -sd+ wagesfor12.txt | bc -l)"
 
-#count16="$(cat "$1" | sort -t ',' -k 3,3n | head -n 3295 | tail -n 15 | wc -l)"
-#echo "$count16"
+total12="$(cat "$1" | sort -t ',' -k 3,3n | head -n 2542 | tail -n 1187 | wc -l)"
+ 
+echo "Average wage for 12 years of school"
+echo "($sumoftotal12)/$total12" | bc
+
+#average wage for 16 years of school
+#       new file for wages of 16 years of school
+cat wages.csv| sort -t ',' -k 3,3n | cut -d, -f 4 | head -n 3295 | tail -n 15 > wagesFor16.txt
+
+#variables
+sumoftotal16="$(paste -sd+ wagesFor16.txt | bc -l)"
+
+total16="$(cat "$1" | sort -t ',' -k 3,3n | head -n 3295 | tail -n 15 | wc -l)"
+
+echo "Average wage for 16 years of school"
+echo "($sumoftotal16)/$total16" | bc
