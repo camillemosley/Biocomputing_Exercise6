@@ -1,17 +1,24 @@
+#Given the data we were given in wages.csv
 
-# 1) Highest Earner
+# 1) Asking for Highest Earner
 echo "Highest Earner:"
 tail -n +2 wages.csv | sort -t, -k4 -nr | head -n1 | awk -F, '{print "Gender: " $1, "Years Experience: " $2, "Wage: " $4}'
-# 2) Lowest Earner
+
+# 2) Asking for Lowest Earner
 echo "Lowest Earner:"
 tail -n +2 wages.csv | sort -t, -k4 -n | head -n1 | awk -F, '{print "Gender: " $1, "Years Experience: " $2, "Wage: " $4}'
-# 3) Number of females in top ten earners
+
+# 3) Asking for Number of females in top ten earners
 echo "Number of females in top ten earners:"
 tail -n +2 wages.csv | sort -t, -k4 -nr | head -n10 | grep -c ^female
+
 # Minimum wage for 12 years of school
 minWage12=$(tail -n +2 wages.csv | awk -F, '$3==12 {print $4}' | sort -n | head -n 1)
+
 # Minimum wage for 16 years of school
 minWage16=$(tail -n +2 wages.csv | awk -F, '$3==16 {print $4}' | sort -n | head -n 1)
+
 # Calculate the difference
 difference=$(echo "$minWage16 - $minWage12" | bc)
+
 echo "Effect of graduating college (12 vs. 16 years of school) on minimum wage: $difference"
