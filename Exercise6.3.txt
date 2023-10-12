@@ -1,0 +1,10 @@
+# Calculate the minimum wage for earners with 12 years of school
+minimum_wage_12_years=$(cut -d ',' -f3,4 wages.csv | grep '12,' | cut -d ',' -f2 | sort -n | head -n 1)
+
+# Calculate the minimum wage for earners with 16 years of school
+min_wage_16_years=$(cut -d ',' -f3,4 wages.csv | grep '16,' | cut -d ',' -f2 | sort -n | head -n 1)
+
+# Calculate the effect of graduating college on minimum wage (this is the difference)
+effect=$(echo "$min_wage_16_years - $min_wage_12_years" | bc)
+
+echo "Effect of Graduating College (16 years vs. 12 years of school) on Minimum Wage: $effect"

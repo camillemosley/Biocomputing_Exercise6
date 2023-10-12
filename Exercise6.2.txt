@@ -1,0 +1,18 @@
+#Code for part 2 of exercise 6
+# Create a new file with gender, yearsExperience, and wage columns, and sort by wage in decreasing order (top earner at top and so on)
+cut -d ',' -f1,2,4 wages.csv | sort -t',' -k3,3nr > sorted_wages.txt
+
+#delete the last line from the text (this line otherwise would be attributed to the lowest earner)
+sed -i '$d' sorted_wages.txt
+
+# Get the highest earner (first line after sorting)
+highest_earner=$(head -n 1 sorted_wages.txt)
+echo "Highest Earner: $highest_earner"
+
+# Get the lowest earner (last line after sorting)
+lowest_earner=$(tail -n 1 sorted_wages.txt)
+echo "Lowest Earner: $lowest_earner"
+
+# Get the number of females in the top ten earners
+top_ten_females=$(head -n 10 sorted_wages.txt | grep -c '^female')
+echo "Number of Females in Top Ten Earners: $top_ten_females"
